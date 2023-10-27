@@ -1,2 +1,2 @@
 # PostageCostWeb
-Website that runs the postage cost calculations
+Website that runs postage cost calculations given inputs from the user.
