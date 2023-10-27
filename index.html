@@ -1,0 +1,38 @@
+<!--Irhan Iftikar, October 2023, Postage Cost Project-->
+<!--index.html that provides the local host web design elements-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta >
+    <title>Irhan Postage Cost</title>
+<!--Connects html to the script.js page-->
+    <script src="script.js"></script>
+</head>
+<body style="background-color:#eef3f8;">
+  <center>
+  <h3>Enter the following data of a package to determine its postage cost:</h3> 
+
+  <!--Creates form elements for the website-->
+  <form>
+      <label for="length">Length: </label><br>
+      <input type="number" id="length"><br><br>
+      <label for="height">Height: </label><br>
+      <input type="number" id="height"><br><br>
+      <label for="thickness">Thickness: </label><br>
+      <input type="number" id="thickness"><br><br>
+      <label for="startzip">Starting Zip Code: </label><br>
+      <input type="number" id="startzip"><br><br>
+      <label for="endzip">Ending Zip Code: </label><br>
+      <input type="number" id="endzip"><br><br>
+  </form>
+  <!--Calls the main function from script.js to calculate cost-->
+  <button onclick="main()">Calculate Cost</button>
+
+  <p>Total Cost ($): </p>
+  <p id="print"></p>       <!--Creates html element where final cost will be printed-->
+  <img src="mail2.jpg" alt="Post Office" style="width:600px;height:220px;">
+  </center>
+</body>
+</html>
