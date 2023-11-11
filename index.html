@@ -1,5 +1,9 @@
-<!--Irhan Iftikar, October 2023, Postage Cost Project-->
-<!--index.html that provides the local host web design elements-->
+<!--Name: Irhan Iftikar-->
+<!--Date: October 2023-->
+<!--Description: Locally hosted website that calculates postage cost given inputs. Index.html provides UI elements for user-->
+<!--Challenges: Advanced UI with background color + center align, rounds values to two decimals, accounts for user errors, removes leading '0' if output is less than 1-->
+<!--Bugs: None found-->
+<!--Sources: Various Internet syntax sources (StackOverflow, w3schools, etc.)-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +17,7 @@
 <body style="background-color:#eef3f8;">
   <center>
   <h3>Enter the following data of a package to determine its postage cost:</h3> 
-
+  <p>(Refresh page to enter new input)</p>
   <!--Creates form elements for the website-->
   <form>
       <label for="length">Length: </label><br>
@@ -22,10 +26,10 @@
       <input type="number" id="height"><br><br>
       <label for="thickness">Thickness: </label><br>
       <input type="number" id="thickness"><br><br>
-      <label for="startzip">Starting Zip Code: </label><br>
-      <input type="number" id="startzip"><br><br>
-      <label for="endzip">Ending Zip Code: </label><br>
-      <input type="number" id="endzip"><br><br>
+      <label for="start_zip">Starting Zip Code: </label><br>
+      <input type="number" id="start_zip"><br><br>
+      <label for="end_zip">Ending Zip Code: </label><br>
+      <input type="number" id="end_zip"><br><br>
   </form>
   <!--Calls the main function from script.js to calculate cost-->
   <button onclick="main()">Calculate Cost</button>
