@@ -1,16 +1,22 @@
-// Irhan Iftikar, October 2023, Postage Cost Assignment
-// script.js code that runs the back-end postage cost calculation in JavaScript
+// Name: Irhan Iftikar
+// Date: October 2023
+// Description: Locally hosted website that calculates postage cost given inputs. Script.js runs back-end cost calculations
+// Challenges: Advanced UI, rounds outputs to two decimals, accounts for user errors, removes leading '0' if output is less than 1
+// Bugs: None found
+// Sources: Various Internet syntax sources (StackOverflow, w3schools, etc.)
 
-// Main function that runs all the code
-function main() {
-    // Takes inputs from index.html and saves them to JS variables
+// Function takes inputs from index.html and returns them as JS variables
+function take_input() {
     var length = document.getElementById("length").value
     var height = document.getElementById("height").value
     var thickness = document.getElementById("thickness").value
-    var startzip = document.getElementById("startzip").value
-    var endzip = document.getElementById("endzip").value
+    var start_zip = document.getElementById("start_zip").value
+    var end_zip = document.getElementById("end_zip").value
+    return [length, height, thickness, start_zip, end_zip]
+}
 
-    // Code below classifies the package type based on length, height, thickness parameters
+// Function takes in length, height, and thickness parameters and returns the package type
+function classify_package(length, height, thickness) {
     var distance = 2*length + 2*height + 2*thickness
     if (length >= 3.5 && length <= 4.25 && height >= 3.5 && height <= 6 && thickness >= 0.007 && thickness <= 0.016) {
         var package = "Regular Post Card"
@@ -28,42 +34,48 @@ function main() {
         else {
         var package = "Unmailable"
       }
+    return package
+}
 
-    // Code below classifies the zone number of the starting and ending zipcode
-    if (1 <= startzip && startzip <= 6999) {
+// Function takes in start and ending zip codes and returns total zones the package passes through
+function classify_zone(start_zip, end_zip) {
+    if (1 <= start_zip && start_zip <= 6999) {
         var start_zone = 1
-    }   else if (7000 <= startzip && startzip <= 19999) {
+    }   else if (7000 <= start_zip && start_zip <= 19999) {
         var start_zone = 2
-    }   else if (20000 <= startzip && startzip <= 35999) {
+    }   else if (20000 <= start_zip && start_zip <= 35999) {
         var start_zone = 3
-    }   else if (36000 <= startzip && startzip <= 62999) {
+    }   else if (36000 <= start_zip && start_zip <= 62999) {
         var start_zone = 4
-    }   else if (63000 <= startzip && startzip <= 84999) {
+    }   else if (63000 <= start_zip && start_zip <= 84999) {
         var start_zone = 5
-    }   else if (85000 <= startzip && startzip <= 99999) {
+    }   else if (85000 <= start_zip && start_zip <= 99999) {
         var start_zone = 6
     }   else {
-        var package = "Unmailable"
+        var start_zone = "Unmailable"
     }
-    if (1 <= endzip && endzip <= 6999) {
+    if (1 <= end_zip && end_zip <= 6999) {
         var end_zone = 1
-    }   else if (7000 <= endzip && endzip <= 19999) {
+    }   else if (7000 <= end_zip && end_zip <= 19999) {
         var end_zone = 2
-    }   else if (20000 <= endzip && endzip <= 35999) {
+    }   else if (20000 <= end_zip && end_zip <= 35999) {
         var end_zone = 3
-    }   else if (36000 <= endzip && endzip <= 62999) {
+    }   else if (36000 <= end_zip && end_zip <= 62999) {
         var end_zone = 4
-    }   else if (63000 <= endzip && endzip <= 84999) {
+    }   else if (63000 <= end_zip && end_zip <= 84999) {
         var end_zone = 5
-    }   else if (85000 <= endzip && endzip <= 99999) {
+    }   else if (85000 <= end_zip && end_zip <= 99999) {
         var end_zone = 6
     }   else {
-        var package = "Unmailable"
+        var end_zone = "Unmailable"
     }
-    // Takes the absolute value of total zones the package travels through
-    var total_zones = Math.abs(start_zone - end_zone)
+    // Calculates total zones package travels through
+    total_zones = Math.abs(start_zone - end_zone)
+    return total_zones
+}
 
-    // Code below calculates total cost of shipping a package using determined variables
+// Function takes in package and total zones and calculates and returns total cost
+function cost(package, total_zones) {
     if (package == "Regular Post Card") {
         var cost = .2 + .03*total_zones
     }   else if (package == "Large Post Card") {
@@ -79,7 +91,6 @@ function main() {
     }   else if (package == "Unmailable") {
         var cost = "Unmailable"
     }
-
     // Code below rounds cost to two decimal points and removes leading '0' if cost is less than 1
     if (typeof cost == "number") {
         cost = cost.toFixed(2)  // Rounds to two decimal points
@@ -88,7 +99,24 @@ function main() {
             cost = cost.slice(1)  // Removes leading '0' if cost is less than 1
         }   else {}
     } else {}
+    return cost
+}
 
-    //Prints the cost by connecting to the element in index.html with the id "print"
+// Main function that calls upon other functions and executes program
+function main() {
+    values = take_input()
+    length = values[0]
+    height = values[1]
+    thickness = values[2]
+    start_zip = values[3]
+    end_zip = values[4]
+    package = classify_package(length, height, thickness)
+    total_zones = classify_zone(start_zip, end_zip)
+    if (typeof total_zones == "number") {   
+        cost = cost(package, total_zones)
+    } else {          
+        cost = "Unmailable"
+    }
+    // Prints the cost by connecting to the element in index.html with the id "print"
     document.getElementById("print").innerHTML = cost
 }
